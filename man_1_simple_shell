@@ -1,0 +1,16 @@
+.TH man 1 "_simple_shell"
+
+.SH NAME
+    Simple shell
+
+.SH SYNOPSIS
+    Prototypes
+
+.SH DESCRIPTION
+It is a commandline interpreter that executes commands read from standard input.
+
+.SH BUGS
+No known bugs.
+
+.SH AUTHORS
+Alex Steve & Joan Mbarire.
