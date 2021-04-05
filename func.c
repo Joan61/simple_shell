@@ -35,7 +35,7 @@ int get_args_length(char *s)
 	char *newstring = s;
 	char *token;
 
-	token = strtok(newstring, ' ');
+	token = strtok(newstring, " ");
 	while (token)
 	{
 		count++;
@@ -60,7 +60,7 @@ char  **handle_argv(char *line)
 	int argc = get_args_length(line_duplicate);
 	int i = 0;
 
-	argv = malloc(sizeof(char *) * argc * strlen_tokens(line));
+	argv = malloc(sizeof(char *) * argc * strlen_token(line));
 
 	token = strtok(line, " ");
 	while (token)

@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-int strlen_tokens(char *s);
+int strlen_token(char *s);
 int get_args_length(char *s);
 char  **handle_argv(char *line);
 void handle_commands(char **argv, char **main_argv);
