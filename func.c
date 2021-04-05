@@ -104,3 +104,26 @@ void handle_commands(char **argv, char **main_argv)
 		wait(&wStatus);
 	}
 }
+
+/**
+ * loop - handle interactive mode and non interactive
+ * @status: interactive or not interactive state integer pointer
+ * @av: array of strings to main function argv
+ * Return: nothing
+ */
+
+void loop(int *status, char **av)
+{
+	char *line = NULL;
+	size_t line_count = 0;
+	ssize_t lines_read;
+	char **argv;
+
+	do {
+		printf("#cisfun$ ");
+		lines_read = getline(&line, &line_count, stdin);
+		line[lines_read - 1] = '\0';
+		argv = handle_argv(line);
+		handle_commands(argv, av);
+	} while (*status && (lines_read != -1));
+}
