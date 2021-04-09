@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- *@handle_argv - creates an array of strings generated from getline
- *
+ *handle_argv - creates an array of strings generated from getline
+ *@line: pointer to a string got  from the stdin
  *Return: array of strings.
  */
 
