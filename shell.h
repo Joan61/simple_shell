@@ -1,6 +1,13 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+
 /**
  *struct args - contains all argument variables for program
  *@argv: array of strings received by program thru stdin
@@ -10,7 +17,8 @@
  *argv argument
  */
 
-typedef struct args {
+typedef struct args
+{
 	char **argv;
 	char **env;
 	char **prgm_name;
@@ -24,7 +32,7 @@ char *_getenv(char *name, Args *args);
 char *_strcat(char *dest, char *src);
 char *concat_create_path_string(char *s1, char *s2);
 char *_get_env_value(char *env_var, Args *args);
-int file_in_path (char *program_path);
+int file_in_path(char *program_path);
 int is_path(char *s);
 char *handle_path(Args *args);
 void command_depending_on_path(Args *args);
