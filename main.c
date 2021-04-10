@@ -13,7 +13,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 	int status;
 	Args arguments;
 
-	arguments.prgm_name = argv[0];
+	arguments.prgm_name = (argv + 0);
 	arguments.env = env;
 
 	status = isatty(STDIN_FILENO);

@@ -35,7 +35,7 @@ char *_get_env_value(char *env_var, Args *args)
 {
 	char *dup_path, *token, *tmp;
 
-	dup_path = _strdup(_getenv("PATH", args));
+	dup_path = _strdup(_getenv(env_var, args));
 	token = strtok(dup_path, "=");
 	token = strtok(NULL, "=");
 	tmp = _strdup(token);

@@ -1,31 +1,40 @@
 #include "shell.h"
 
 /**
- *handle_argv - creates an array of strings generated from getline
- *@line: pointer to a string got  from the stdin
- *Return: array of strings.
+ * handle_argv - creates an array of strings generated from getline
+ * @args: Args data structure
+ * @line: pointer to a string got  from the stdin
+ * Return: array of strings.
  */
 
-char **handle_argv(char *line)
+char **handle_argv(Args *args, char *line)
 {
-	char *token;
-	char *line_duplicate = _strdup(line);
-	char **argv;
-	int argc = get_args_length(line_duplicate);
-	int i = 0;
+	char *token, *line_duplicate;
+	int argc, i = 0, j;
 
-	argv = malloc(sizeof(char *) * (argc + 1));
+	if (!line)
+		return (NULL);
+	line_duplicate = _strdup(line);
+	argc = get_args_length(line_duplicate);
+
+	args->argv = malloc(sizeof(char *) * (argc + 1));
+
+	if (!args->argv)
+		return (NULL);
 
 	token = strtok(line, " '\n''\t'");
-while (token)
-{
-argv[i] = malloc(sizeof(char) * (_str_length(line) + 1));
-argv[i] = token;
-token = strtok(NULL, " '\n''\t'");
-	i++;
-}
+	while (token)
+	{
+		args->argv[i] = malloc(sizeof(char) * (_str_length(token) + 1));
 
-free(line_duplicate);
+		for (j = 0; token[j] != '\0'; j++)
+			args->argv[i][j] = token[j];
+		args->argv[i][j] = '\0';
+		token = strtok(NULL, " '\n''\t'");
+		i++;
+	}
+	args->argv[i] = NULL;
 
-return (argv);
+	free(line_duplicate);
+	return (args->argv);
 }

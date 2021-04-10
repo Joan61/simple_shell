@@ -15,18 +15,16 @@ void loop(int *status, Args *args)
 	ssize_t lines_read;
 
 	do {
-		printf("alex@linux~$ ");
+		printf("#cisfun$ ");
 		lines_read = getline(&line, &line_count, stdin);
-		if (lines_read != -1)
-		{
-			args->argv = handle_argv(line);
-			handle_commands(args);
-		}
-		else
+		if (lines_read == -1)
 		{
 			printf("\n");
+			break;
 		}
-	} while (*status && (lines_read != -1));
-	free(line);
-	freeGrid(args->argv);
+
+		handle_argv(args, line);
+		if (args->argv)
+			handle_commands(args);
+	} while (*status && (*line != EOF));
 }

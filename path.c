@@ -44,25 +44,18 @@ int is_path(char *s)
 
 char  *handle_path(Args *args)
 {
-	int is_path_flag;
 	char *token, *generated_path, *full_path_value, *final_path;
 
 	if (args == NULL)
 		return (NULL);
 
-	is_path_flag = is_path(args->argv[0]);
-	if (is_path_flag == 0)
+	if (is_path(args->argv[0]) == 0)
 	{
-		if (file_in_path(args->argv[0]) != 0)
-		{
-			return (NULL);
-		}
-		else
-		{
-			final_path = _strdup(args->argv[0]);
-			return (final_path);
-		}
+		if (file_in_path(args->argv[0]) == 0)
+			return (_strdup(args->argv[0]));
+		return (NULL);
 	}
+
 	full_path_value = _get_env_value("PATH", args);
 	token = strtok(full_path_value, ":");
 	while (token)
@@ -71,7 +64,9 @@ char  *handle_path(Args *args)
 		if (file_in_path(generated_path) == 0)
 		{
 			final_path = _strdup(generated_path);
-			break;
+			free(full_path_value);
+			free(generated_path);
+			return (final_path);
 		}
 		token = strtok(NULL, ":");
 	}
@@ -79,7 +74,7 @@ char  *handle_path(Args *args)
 	free(full_path_value);
 	free(generated_path);
 
-	return (final_path);
+	return (NULL);
 }
 
 /**
