@@ -17,7 +17,7 @@ void handle_commands(Args *args)
 	path = handle_path(args);
 	f = get_command_opts(args->argv[0]);
 
-	if (path != NULL)
+	if (f != NULL)
 	{
 		f(args);
 	}
