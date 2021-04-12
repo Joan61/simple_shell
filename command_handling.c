@@ -12,10 +12,16 @@ void handle_commands(Args *args)
 	pid_t child_pid;
 	int wStatus;
 	char *path;
+	void (*f)(Args *args);
 
 	path = handle_path(args);
+	f = get_command_opts(args->argv[0]);
 
 	if (path != NULL)
+	{
+		f(args);
+	}
+	else if (path != NULL)
 	{
 		child_pid = fork();
 		if (child_pid == -1)
@@ -31,13 +37,9 @@ void handle_commands(Args *args)
 		{
 			wait(&wStatus);
 		}
-		free(path);
-	}
-	else
-	{
-		handle_other_commands(args);
 	}
 }
+
 
 /**
  * get_command_opts - fetches command options for the program
@@ -61,19 +63,4 @@ void (*get_command_opts(char *command))(Args *args)
 		i++;
 	}
 	return (NULL);
-}
-
-/**
- * handle_other_commands - handles other commands input via stdin
- * @args: data structure of type Args
- * Return: nothing
- */
-
-void handle_other_commands(Args *args)
-{
-	void (*f)(Args *args);
-
-	f = get_command_opts(args->argv[0]);
-	if (f != NULL)
-		f(args);
 }

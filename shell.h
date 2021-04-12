@@ -51,7 +51,6 @@ void handle_commands(Args *args);
 void loop(int *status, Args *args);
 void freeGrid(char **args);
 
-void handle_other_commands(Args *args);
 void _printenv(Args *args);
 void program_exit(Args *args);
 void (*get_command_opts(char *command))(Args *args);
