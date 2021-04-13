@@ -24,7 +24,7 @@ int file_in_path(char *program_path)
 
 int is_path(char *s)
 {
-	int i;
+	int i = 0;
 
 	while (s[i])
 	{
@@ -44,7 +44,7 @@ int is_path(char *s)
 
 char  *handle_path(Args *args)
 {
-	char *token, *generated_path, *full_path_value, *final_path;
+	char *token, *generated_path, *full_path_value;
 
 	if (args == NULL)
 		return (NULL);
@@ -61,18 +61,18 @@ char  *handle_path(Args *args)
 	while (token)
 	{
 		generated_path = concat_create_path_string(token, args->argv[0]);
+		if (!generated_path)
+			return (NULL);
 		if (file_in_path(generated_path) == 0)
 		{
-			final_path = _strdup(generated_path);
-			free(full_path_value);
-			free(generated_path);
-			return (final_path);
+			single_free(full_path_value);
+			return (generated_path);
 		}
 		token = strtok(NULL, ":");
+		single_free(generated_path);
 	}
 
-	free(full_path_value);
-	free(generated_path);
+	single_free(full_path_value);
 
 	return (NULL);
 }
@@ -88,9 +88,19 @@ char *concat_create_path_string(char *s1, char *s2)
 {
 	char *new_string;
 
-	new_string = malloc(sizeof(char) * (_str_length(s1) + _str_length(s2) + 1));
+	if (!s1 || !s2)
+		return (NULL);
+
+	new_string = malloc(sizeof(char) * (_str_length(s1) + _str_length(s2) + 2));
+
+	if (!new_string)
+		return (NULL);
+
+	new_string[0] = '\0';
+
 	_strcat(new_string, s1);
 	_strcat(new_string, "/");
 	_strcat(new_string, s2);
+
 	return (new_string);
 }

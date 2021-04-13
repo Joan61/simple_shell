@@ -26,15 +26,15 @@ char *_strdup(char *str)
 	char *newStr;
 	int i = 0;
 
-	if (str == 0)
-		return (0);
+	if (!str)
+		return (NULL);
 
 	newStr = malloc((_str_length(str) + 1) * sizeof(char));
 
-	if (newStr == 0)
-		return (0);
+	if (!newStr)
+		return (NULL);
 
-	for (i = 0; i < _str_length(str); i++)
+	for (i = 0; i < (_str_length(str) + 1); i++)
 		newStr[i] = str[i];
 
 	return (newStr);
@@ -49,10 +49,12 @@ char *_strdup(char *str)
 
 char *_strcat(char *dest, char *src)
 {
-	int length = 0, i;
+	int length = 0, i = 0;
 
-	for (i = 0; dest[i] != '\0'; i++)
-		length++;
+	if (!dest || !src)
+		return (NULL);
+
+	length = _str_length(dest);
 
 	for (i = 0 ; src[i] != '\0' ; i++)
 		dest[length + i] = src[i];
@@ -75,7 +77,11 @@ int get_args_length(char *s)
 	char *newstring = s;
 	char *token;
 
+	if (!s)
+		return (0);
+
 	token = strtok(newstring, " '\n''\t'");
+
 	while (token)
 	{
 		count++;

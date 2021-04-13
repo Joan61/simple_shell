@@ -49,7 +49,11 @@ int is_path(char *s);
 char *handle_path(Args *args);
 void handle_commands(Args *args);
 void loop(int *status, Args *args);
-void freeGrid(char **args);
+void double_free(char **args);
+void single_free(char *arg);
+int _strcmp(char *s1, char *s2);
+int _putchar(char c);
+void _print(char *s);
 
 void _printenv(Args *args);
 void program_exit(Args *args);

@@ -8,7 +8,7 @@
 
 void program_exit(Args *args)
 {
-	freeGrid(args->argv);
+	double_free(args->argv);
 	exit(EXIT_SUCCESS);
 }
 
@@ -24,7 +24,8 @@ void _printenv(Args *args)
 
 	while (*envp)
 	{
-		printf("%s\n", *envp);
+		_print(*envp);
+		_print("\n");
 		envp++;
 	}
 }

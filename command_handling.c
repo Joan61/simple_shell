@@ -12,32 +12,40 @@ void handle_commands(Args *args)
 	pid_t child_pid;
 	int wStatus;
 	char *path;
-	void (*f)(Args *args);
+	void (*built_in_func)(Args *args);
 
 	path = handle_path(args);
-	f = get_command_opts(args->argv[0]);
+	built_in_func = get_command_opts(args->argv[0]);
 
-	if (f != NULL)
+	if (built_in_func != NULL)
 	{
-		f(args);
+		single_free(path);
+		built_in_func(args);
+
 	}
-	else if (path != NULL)
+	else
 	{
 		child_pid = fork();
 		if (child_pid == -1)
-		{
 			perror(*(args->prgm_name));
-		}
-		else if (child_pid == 0)
+		if (child_pid == 0)
 		{
-			if (execve(path, args->argv, NULL) == -1)
-				perror(*(args->prgm_name));
+			if (path)
+			{
+				if (execve(path, args->argv, NULL) == -1)
+					perror(*(args->prgm_name));
+			}
+			else
+			{
+				if (execve(args->argv[0], args->argv, NULL) == -1)
+					perror(*(args->prgm_name));
+			}
 		}
 		else
-		{
 			wait(&wStatus);
-		}
+		single_free(path);
 	}
+	double_free(args->argv);
 }
 
 
@@ -58,7 +66,7 @@ void (*get_command_opts(char *command))(Args *args)
 
 	while (cmd_opts[i].cmd != NULL)
 	{
-		if (strcmp(command, cmd_opts[i].cmd) == 0)
+		if (_strcmp(command, cmd_opts[i].cmd) == 0)
 			return (cmd_opts[i].f);
 		i++;
 	}

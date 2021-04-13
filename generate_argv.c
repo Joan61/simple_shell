@@ -10,7 +10,7 @@
 char **handle_argv(Args *args, char *line)
 {
 	char *token, *line_duplicate;
-	int argc, i = 0, j;
+	int argc, i = 0;
 
 	if (!line)
 		return (NULL);
@@ -25,16 +25,12 @@ char **handle_argv(Args *args, char *line)
 	token = strtok(line, " '\n''\t'");
 	while (token)
 	{
-		args->argv[i] = malloc(sizeof(char) * (_str_length(token) + 1));
-
-		for (j = 0; token[j] != '\0'; j++)
-			args->argv[i][j] = token[j];
-		args->argv[i][j] = '\0';
+		args->argv[i] = _strdup(token);
 		token = strtok(NULL, " '\n''\t'");
 		i++;
 	}
 	args->argv[i] = NULL;
 
-	free(line_duplicate);
+	single_free(line_duplicate);
 	return (args->argv);
 }

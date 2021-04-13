@@ -10,21 +10,25 @@
 
 void loop(int *status, Args *args)
 {
-	char *line = NULL;
-	size_t line_count = 0;
+	char *line;
+	size_t line_count;
 	ssize_t lines_read;
 
 	do {
-		printf("#cisfun$ ");
+		line = NULL;
+		line_count = 0;
+
+		_print("#cisfun$ ");
 		lines_read = getline(&line, &line_count, stdin);
+
 		if (lines_read == -1)
 		{
-			printf("\n");
+			single_free(line);
 			break;
 		}
 
 		handle_argv(args, line);
-		if (args->argv)
-			handle_commands(args);
-	} while (*status && (*line != EOF));
+		single_free(line);
+		handle_commands(args);
+	} while (*status && (lines_read != -1));
 }

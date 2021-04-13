@@ -16,10 +16,13 @@ char *_getenv(char *name, Args *args)
 	{
 		env_dup = _strdup(args->env[i]);
 		token = strtok(env_dup, "=");
-		if (strcmp(token, name) == 0)
+		if (_strcmp(token, name) == 0)
+		{
+			single_free(env_dup);
 			break;
+		}
+		single_free(env_dup);
 	}
-	free(env_dup);
 
 	return (args->env[i]);
 }
@@ -35,11 +38,15 @@ char *_get_env_value(char *env_var, Args *args)
 {
 	char *dup_path, *token, *tmp;
 
+	if (!env_var || !args)
+		return (NULL);
+
 	dup_path = _strdup(_getenv(env_var, args));
 	token = strtok(dup_path, "=");
 	token = strtok(NULL, "=");
 	tmp = _strdup(token);
-	free(dup_path);
+
+	single_free(dup_path);
 
 	return (tmp);
 }
