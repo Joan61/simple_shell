@@ -24,8 +24,8 @@ void _printenv(Args *args)
 
 	while (*envp)
 	{
-		_print(*envp);
-		_print("\n");
+		print_stdout(*envp);
+		print_stdout("\n");
 		envp++;
 	}
 }

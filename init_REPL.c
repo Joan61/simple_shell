@@ -18,13 +18,19 @@ void loop(int *status, Args *args)
 		line = NULL;
 		line_count = 0;
 
-		_print("#cisfun$ ");
+		print_stdout("#cisfun$ ");
 		lines_read = getline(&line, &line_count, stdin);
 
 		if (lines_read == -1)
 		{
 			single_free(line);
-			break;
+			print_stdout("\n");
+			exit(EXIT_SUCCESS);
+		}
+		else if (_strcmp(line, "\n") == 0)
+		{
+			single_free(line);
+			continue;
 		}
 
 		handle_argv(args, line);

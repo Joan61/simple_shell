@@ -52,9 +52,11 @@ void loop(int *status, Args *args);
 void double_free(char **args);
 void single_free(char *arg);
 int _strcmp(char *s1, char *s2);
-int _putchar(char c);
-void _print(char *s);
 
+void print_stdout(char *s);
+void print_stderr(char *s);
+void create_child(Args *args, char *path);
+void construct_error(Args *args);
 void _printenv(Args *args);
 void program_exit(Args *args);
 void (*get_command_opts(char *command))(Args *args);

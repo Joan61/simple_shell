@@ -10,6 +10,9 @@
 
 int _strcmp(char *s1, char *s2)
 {
+	if (!s1 || !s2)
+		return (-1);
+
 	while (*s1 && *s1 == *s2)
 	{
 		s1++;
@@ -19,33 +22,23 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
- * _print - prints string to the stdout
+ * print_stdout - prints string to the stdout
  * @s: string to be printed
  * Return: nothing
  */
 
-void _print(char *s)
+void print_stdout(char *s)
 {
-	int i = 0;
+	write(STDOUT_FILENO, s, _str_length(s));
+}
 
-	if (s)
-	{
-		while (s[i])
-		{
-			_putchar(s[i]);
-			i++;
-		}
-	}
+/**
+ * print_stderr - prints string to the stderr
+ * @s: string to be printed
+ * Return: nothing
+ */
+
+void print_stderr(char *s)
+{
+	write(STDERR_FILENO, s, _str_length(s));
 }

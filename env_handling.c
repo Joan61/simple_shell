@@ -36,17 +36,16 @@ char *_getenv(char *name, Args *args)
 
 char *_get_env_value(char *env_var, Args *args)
 {
-	char *dup_path, *token, *tmp;
+	char *tmp, i = 0;
 
-	if (!env_var || !args)
-		return (NULL);
+	tmp = _getenv(env_var, args);
+	while (*(tmp + i))
+	{
+		if (*(tmp + i) == '=')
+			break;
+		i++;
+	}
 
-	dup_path = _strdup(_getenv(env_var, args));
-	token = strtok(dup_path, "=");
-	token = strtok(NULL, "=");
-	tmp = _strdup(token);
-
-	single_free(dup_path);
-
-	return (tmp);
+	tmp = (tmp + (i + 1));
+	return (_strdup(tmp));
 }
