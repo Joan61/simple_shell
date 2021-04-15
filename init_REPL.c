@@ -18,7 +18,9 @@ void loop(int *status, Args *args)
 		line = NULL;
 		line_count = 0;
 
-		print_stdout("$ ");
+		if (*status)
+			print_stdout("$ ");
+
 		lines_read = getline(&line, &line_count, stdin);
 
 		if (lines_read == -1)
@@ -36,5 +38,6 @@ void loop(int *status, Args *args)
 		handle_argv(args, line);
 		single_free(line);
 		handle_commands(args);
+		fflush(stdout);
 	} while (*status && (lines_read != -1));
 }

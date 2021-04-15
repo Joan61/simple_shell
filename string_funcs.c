@@ -78,18 +78,17 @@ char *_strcat(char *dest, char *src)
 int get_args_length(char *s)
 {
 	int count = 0;
-	char *newstring = s;
 	char *token;
 
 	if (!s)
 		return (0);
 
-	token = strtok(newstring, " '\n''\t'");
+	token = strtok(s, " '\r''\n''\t'");
 
 	while (token)
 	{
 		count++;
-		token = strtok(NULL, " '\n''\t'");
+		token = strtok(NULL, " '\r''\n''\t'");
 	}
 
 	return (count);

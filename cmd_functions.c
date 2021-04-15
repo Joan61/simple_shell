@@ -9,6 +9,7 @@
 void program_exit(Args *args)
 {
 	double_free(args->argv);
+	fflush(stdout);
 	exit(EXIT_SUCCESS);
 }
 

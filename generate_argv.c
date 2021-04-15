@@ -22,11 +22,11 @@ char **handle_argv(Args *args, char *line)
 	if (!args->argv)
 		return (NULL);
 
-	token = strtok(line, " :'\r''\n''\t'");
+	token = strtok(line, " '\r''\n''\t'");
 	while (token)
 	{
 		args->argv[i] = _strdup(token);
-		token = strtok(NULL, " :'\r''\n''\t'");
+		token = strtok(NULL, " '\r''\n''\t'");
 		i++;
 	}
 	args->argv[i] = NULL;
