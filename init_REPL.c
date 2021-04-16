@@ -27,15 +27,18 @@ void loop(int *status, Args *args)
 		{
 			single_free(line);
 			print_stdout("\n");
+			fflush(stdout);
 			exit(EXIT_SUCCESS);
 		}
-		else if (_strcmp(line, "\n") == 0)
+		handle_argv(args, line);
+
+		if (args->argc == 0)
 		{
 			single_free(line);
+			double_free(args->argv);
 			continue;
 		}
 
-		handle_argv(args, line);
 		single_free(line);
 		handle_commands(args);
 		fflush(stdout);

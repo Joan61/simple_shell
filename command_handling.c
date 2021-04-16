@@ -19,7 +19,6 @@ void handle_commands(Args *args)
 	{
 		single_free(path);
 		built_in_func(args);
-
 	}
 	else if (path != NULL)
 	{
@@ -50,11 +49,15 @@ void create_child(Args *args, char *path)
 	if (child_pid == -1)
 	{
 		perror(*(args->prgm_name));
+		exit(EXIT_FAILURE);
 	}
 	else if (child_pid == 0)
 	{
 		if (execve(path, args->argv, NULL) == -1)
+		{
 			perror(*(args->prgm_name));
+			 exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
@@ -88,6 +91,7 @@ void (*get_command_opts(char *command))(Args *args)
 	Opts cmd_opts[] = {
 		{"exit", program_exit},
 		{"env", _printenv},
+		{"cd", change_directory},
 		{NULL, NULL}
 	};
 

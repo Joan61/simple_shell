@@ -10,14 +10,14 @@
 char **handle_argv(Args *args, char *line)
 {
 	char *token, *line_duplicate;
-	int argc, i = 0;
+	int i = 0;
 
 	if (!line)
 		return (NULL);
 	line_duplicate = _strdup(line);
-	argc = get_args_length(line_duplicate);
+	args->argc = get_args_length(line_duplicate);
 
-	args->argv = malloc(sizeof(char *) * (argc + 1));
+	args->argv = malloc(sizeof(char *) * (args->argc + 1));
 
 	if (!args->argv)
 		return (NULL);

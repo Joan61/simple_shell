@@ -12,6 +12,9 @@ char *_getenv(char *name, Args *args)
 	int i;
 	char *token, *env_dup;
 
+	if (!args->env)
+		return (NULL);
+
 	for (i = 0; args->env[i] != '\0'; i++)
 	{
 		env_dup = _strdup(args->env[i]);
@@ -19,12 +22,12 @@ char *_getenv(char *name, Args *args)
 		if (_strcmp(token, name) == 0)
 		{
 			single_free(env_dup);
-			break;
+			return (args->env[i]);
 		}
 		single_free(env_dup);
 	}
 
-	return (args->env[i]);
+	return (NULL);
 }
 
 /**

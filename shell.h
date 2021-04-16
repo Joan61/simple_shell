@@ -7,12 +7,13 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 /**
  *struct args - contains all argument variables for program
  *@argv: array of strings received by program thru stdin
  *@env: environment variables from main function.
- *
+ *@argc: arguments count of @argv
  *@prgm_name: name of program, usually index 0 of main function.
  *argv argument
  */
@@ -22,6 +23,7 @@ typedef struct args
 	char **argv;
 	char **env;
 	char **prgm_name;
+	int argc;
 } Args;
 
 /**
@@ -52,6 +54,10 @@ void loop(int *status, Args *args);
 void double_free(char **args);
 void single_free(char *arg);
 int _strcmp(char *s1, char *s2);
+void too_many_args_err(Args *args);
+int isNumericChar(char x);
+int _atoi(char *s);
+void change_directory(Args *args);
 
 void print_stdout(char *s);
 void print_stderr(char *s);
