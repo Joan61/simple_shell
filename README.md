@@ -1,11 +1,40 @@
 # SIMPLE SHELL
 
-- The ***shell*** is your interface to the operating system. It acts as a
+The ***shell*** is your interface to the operating system. It acts as a
 ***command interpreter***; takes each command and passes it to the operating
 system. It then displays the results of this operation on your screen.
 
-- `the shell` works like the bash and other basic shells.
+`the shell` works like the bash and other basic shells.
 
-- The Shell works by being compiled using GCC 4.8.4 compiler or later versions.
+The shell works by being compiled using GCC 4.8.4 compiler or later versions.
 The shell can compile using `gcc 4.8.4 -Wall -Werror -Wextra -pedantic *.c -o shell`.
+
+# How to launch the shell after compiling:
+
+`./shell`
+
+- Output: prompt to terminal: $
+
+
+# Syntax
+
+The shell works once the user enters a command. The shell commands take in the following
+syntax: `command name {arguments}`. The shell will execute a command ater it is keyed
+in by the user using the command followed by the arguments.
+
+`mkdir shell.h` This example takes in a command by the user followed by the arguments.
+In this case the command is `mkdir` (to make a new directory) followed by argument
+the file name, in this case `holberton.h`.
+
+For more information on mkdir, one can use `man` command which will show a manual of the given
+command or any other command.
+
+### Built-ins
+
+The shell also includes two built-ins which are commands that are within the shell itself.
+The two built-ins are `exit` and `env`.
+
+## Compilation
+
+All files will be compiled with gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
