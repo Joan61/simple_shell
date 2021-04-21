@@ -45,11 +45,29 @@ To exit a commmand or the process, a user can use `ctrl c`. `ctrl c` stops a pro
 and causes it to abort. You can also use `ctrl D`, which will just exit and give an
 exit status of ***0***.
 
+In our shell  program, to exit the process, we use `exit` command, which will
+abort the process.
+
 ## Compilation
 
 All files will be compiled with gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
 ## Files
+
+- `README.md` - contains the explanation of the Simple Shell functionality.
+- `cmd_functions.c` - contains all the functions (majorly built-in) that execute
+commands for simple shell
+- `command_handling.c` - it processes the execution of the commands
+- `env_handling.c` - contains functions that handle environment variables
+- `free.c` - contains functions involved in freeing allocated memory
+- `generate_argv.c` - generates an array of strings of commands
+- `init_REPL.c` - initializes a read eveluate print loop
+- `man_1_simple_shell` - the program's manpage/manual
+- `path.c` - functions that handle the program's path
+- `shell.c` - initializes the `simple shell`. It is the program's entry point
+- `shell.h` - header file. Contains all the prototypes for functions used and libraries
+- `string_funcs.c` -  contains string functions
+- `string_funcs2.c` - contains string functions
 
 ## Authors
 
