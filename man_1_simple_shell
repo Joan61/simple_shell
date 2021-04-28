@@ -1,16 +1,64 @@
-.TH man 1 "_simple_shell"
+.TH hsh 1 "01 April 2021" "Joan & Alex version 1.0" "Programmer's Manual"
+
+
 
 .SH NAME
-    Simple shell
+.B Simple shell(hsh)
+.PP
+hsh - command interpreter (shell)
 
 .SH SYNOPSIS
-    Prototypes
+.PP
+.B ./hsh
 
+./hsh [options] [file]
+
+
+.PP
+.B
 .SH DESCRIPTION
-It is a commandline interpreter that executes commands read from standard input.
+The simple shell is a command line interpreter that takes in commands the user- \
+input and gives it to the computer for it to process or interpret the commands.
+.PP
+.SH EXAMPLE
+$PATH:
+.PP
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+
+
+.PP
+Simple shell has two built-in commands that intergrate with other commands- \
+which can be located in the PATH. The output is meant to clone or duplicate \
+exactly s the shell 'sh' or 'bash'.
+
+.SH INITIALIZATION
+To use the simple shell, the user needs to compile \
+using: gcc. Then, run the output file by calling it by the output \
+name it was given.
+.PP
+.SH The shell will compile using the following:
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+
+
+.B
+.PP
+.SH BUILT-INS
+.PP
+.B There are two built-ins within the shell. \
+
+
+.PP
+env - tells the shell program to display all the environment variables with their \ 
+values. It is a way of accessing the values throught the shell.
+.PP
+exit - if the user wishes to exit the the shell, they can use this command. Exits program with status 0. \
+
 
 .SH BUGS
 No known bugs.
 
 .SH AUTHORS
-Alex Steve & Joan Mbarire.
+.B Joan Mbarire & Alex Steve
+
+
