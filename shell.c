@@ -11,14 +11,14 @@
 int main(int argc __attribute__((unused)), char **argv, char **env)
 {
 	int status;
-	Args arguments;
+        Args arguments;
 
-	signal(SIGINT, SIG_IGN);
-	arguments.prgm_name = argv;
-	arguments.env = env;
+        signal(SIGINT, SIG_IGN);
+        arguments.prgm_name = argv;
+        arguments.env = env;
 
-	status = isatty(STDIN_FILENO);
-	loop(&status, &arguments);
+        status = isatty(STDIN_FILENO);
+        loop(&status, &arguments);
 
-	return (0);
+        return (0);
 }
